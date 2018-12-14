@@ -1,0 +1,53 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: createInstances
+      vars:
+        gcp_zone: us-west1-b
+        gcp_region: us-west1
+        gcp_project: sdb-aula-pratica
+        gcp_cred_kind: serviceaccount
+        gcp_cred_file: ~/Desktop/UMinho/credentials.json
+        gcp_machine_type: f1-micro
+        source_image: projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts
+        disk_size: 10
+        disks:
+          - disk-01
+          - disk-02
+          - disk-03
+          - disk-04
+        addresses:
+          - addr-01
+          - addr-02
+          - addr-03
+          - addr-04
+        instances:
+          - { index: 1, tag: wslb }
+          - { index: 2, tag: wslb }
+          - { index: 3, tag: ws }
+          - { index: 4, tag: ws }
+          # - { index: 1, tag: ghostlb }
+          # - { index: 2, tag: ghostlb }
+          # - { index: 1, tag: ghostcore }
+          # - { index: 2, tag: ghostcore }
+          # - { index: 1, tag: db }
+          # - { index: 2, tag: db }
+          # - { index: 3, tag: db }
+          
+
+- hosts: wslb
+  become: yes
+  roles: 
+    - role: loadbalancer
+
+- hosts: ws
+  become: yes
+  roles:
+    - role: webserver
+
+- hosts: database
+
+- hosts: ghostcore
