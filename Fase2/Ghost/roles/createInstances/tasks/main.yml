@@ -69,7 +69,7 @@
     - network: "{{ network }}"
       access_configs:
       - name: External NAT
-        nat_ip: "{{ address.results[item.index] }}"
+        nat_ip: "{{ address.results[item.index-1] }}"
         type: ONE_TO_ONE_NAT
     zone: "{{ gcp_zone }}"
     project: "{{ gcp_project }}"
@@ -120,6 +120,13 @@
     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/keepalived.conf"
     regexp: 'WEBSERVER2'
     replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
+
+# Replace INTERNALIP Internal IP in NGINX Config File
+- name: Replace NGINX Config File
+  replace:
+    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/default.conf"
+    regexp: 'INTERNALIP'
+    replace: "10.240.0.128"
 
 - name: Add hosts to in memory inventory
   add_host:

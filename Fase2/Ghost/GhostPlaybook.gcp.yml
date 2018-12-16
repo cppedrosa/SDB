@@ -24,7 +24,6 @@
           - addr-02
           - addr-03
           - addr-04
-          - addr-05
         instances:
           - { index: 1, tag: wslb }
           - { index: 2, tag: wslb }
@@ -42,12 +41,17 @@
 - hosts: wslb
   become: yes
   roles: 
-    - role: loadbalancer
+    - role: webLoadBalancers
 
 - hosts: ws
   become: yes
   roles:
-    - role: webserver
+    - role: webServers
+
+- hosts: ghostlb
+  become: yes
+  roles:
+    - role: ghostLoadBalancers
 
 - hosts: database
 
