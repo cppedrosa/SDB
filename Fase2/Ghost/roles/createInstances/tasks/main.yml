@@ -69,7 +69,7 @@
     - network: "{{ network }}"
       access_configs:
       - name: External NAT
-        nat_ip: "{{ address.results[item.index-1] }}"
+        nat_ip: "{{ address.results[item.index] }}"
         type: ONE_TO_ONE_NAT
     zone: "{{ gcp_zone }}"
     project: "{{ gcp_project }}"
@@ -78,6 +78,48 @@
     state: present
   register: instance
   loop: "{{ instances }}"
+
+# Replace 1st WebServer Internal IP in the HAProxy Config File
+- name: Replace HAProxy's 1st IP
+  replace:
+    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/haproxy.cfg"
+    regexp: 'WEBSERVER1'
+    replace: "{{ instance.results[2].networkInterfaces[0].networkIP }}"
+
+# Replace 2nd WebServer Internal IP in the HAProxy Config File
+- name: Replace HAProxy's 2nd IP
+  replace:
+    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/haproxy.cfg"
+    regexp: 'WEBSERVER2'
+    replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
+
+# Replace External IP in KeepAlived Config File
+- name: Replace KeepAlived's IP's
+  replace:
+    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/keepalived.conf"
+    regexp: 'EXTERNALIP'
+    replace: "{{ address.results[0].address }}"
+
+# Replace Internal IP in KeepAlived Config File
+- name: Replace KeepAlived's IP's
+  replace:
+    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/keepalived.conf"
+    regexp: 'INTERNALIP'
+    replace: "{{ network.gatewayIPv4 }}"
+
+# Replace WEBSERVER1 Internal IP in KeepAlived Config File
+- name: Replace KeepAlived's IP's
+  replace:
+    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/keepalived.conf"
+    regexp: 'WEBSERVER1'
+    replace: "{{ instance.results[2].networkInterfaces[0].networkIP }}"
+
+# Replace WEBSERVER2 Internal IP in KeepAlived Config File
+- name: Replace KeepAlived's IP's
+  replace:
+    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/keepalived.conf"
+    regexp: 'WEBSERVER2'
+    replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
 
 - name: Add hosts to in memory inventory
   add_host:

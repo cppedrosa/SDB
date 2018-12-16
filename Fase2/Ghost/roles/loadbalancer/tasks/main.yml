@@ -10,41 +10,21 @@
   tags:
     - wslb
 
-# Copiar os Ficheiros Para a Diretoria /etc/.../*.cfg
+# Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
 - name: Copy HAProxy Configuration File
   template:
-    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/TP1/Fase\ 2/haproxy.cfg"
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/haproxy.cfg"
     dest: "/etc/haproxy/haproxy.cfg"
   tags:
     - wslb
 
 - name: Copy KeepAlived Configuration File
   template:
-    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/TP1/Fase\ 2/keepalived.conf"
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/keepalived.conf"
     dest: "/etc/keepalived/keepalived.conf"
   tags:
     - wslb
-
-# - name: Replace HAProxy's IP's
-#   replace:
-#     path: "/etc/haproxy/haproxy.cfg"
-#     regexp: # '^#listen_addresses'
-#     replace: # listen_addresses
-#   notify:
-#     - restart haproxy
-#   tags:
-#     - wslb
-# 
-# - name: Replace KeepAlived's IP's
-#   replace:
-#     path: "/etc/keepalived/keepalived.conf"
-#     regexp: # '^#listen_addresses'
-#     replace: # listen_addresses
-#   notify:
-#     - restart keepalived
-#   tags:
-#     - wslb
-
+ 
 - name: restart haproxy
   service:
     name: haproxy
