@@ -16,43 +16,49 @@
         disk_size: 10
         disks:
           - disk-01
-          - disk-02
-          - disk-03
-          - disk-04
+          # - disk-02
+          # - disk-03
+          # - disk-04
         addresses:
           - addr-01
-          - addr-02
-          - addr-03
-          - addr-04
+          # - addr-02
+          # - addr-03
+          # - addr-04
         instances:
-          - { index: 1, tag: wslb }
-          - { index: 2, tag: wslb }
-          - { index: 3, tag: ws }
-          - { index: 4, tag: ws }
+          # - { index: 1, tag: wslb }
+          # - { index: 2, tag: wslb }
+          # - { index: 3, tag: ws }
+          # - { index: 4, tag: ws }
           # - { index: 1, tag: ghostlb }
           # - { index: 2, tag: ghostlb }
           # - { index: 1, tag: ghostcore }
           # - { index: 2, tag: ghostcore }
-          # - { index: 1, tag: db }
+           - { index: 1, tag: db }
           # - { index: 2, tag: db }
           # - { index: 3, tag: db }
           
 
-- hosts: wslb
-  become: yes
-  roles: 
-    - role: webLoadBalancers
+# - hosts: wslb
+#   become: yes
+#   roles: 
+#     - role: webLoadBalancers
 
-- hosts: ws
+# - hosts: ws
+#   become: yes
+#   roles:
+#     - role: webServers
+
+# - hosts: ghostlb
+#   become: yes
+#   roles:
+#     - role: ghostLoadBalancers
+
+- hosts: db
   become: yes
   roles:
-    - role: webServers
+    - role: dataBases
 
-- hosts: ghostlb
-  become: yes
-  roles:
-    - role: ghostLoadBalancers
-
-- hosts: database
-
-- hosts: ghostcore
+# - hosts: ghostcore
+#   become: yes
+#   roles:
+#     - role: ghostCores

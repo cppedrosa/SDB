@@ -1,0 +1,33 @@
+- name: Install MySQL
+  apt:
+    name: ['python-mysqldb', 'mysql-server']
+
+  # Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
+- name: Copy MySQL Conf File
+  template:
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/mysqld.cnf"
+    dest: "/etc/mysql/mysql.conf.d/mysqld.cnf"
+  tags:
+    - wslb
+
+- name: Restart MySQL Server
+  service:
+    name: mysql
+    state: restarted
+
+- name: Change Root Password
+  mysql_user:
+    name: root
+    password: 2130
+    state: present
+
+- name: Create User For Ghost
+  mysql_user:
+    login_user: root
+    login_password: 2130
+    name: ghost_user
+    password: 'ghost'
+    host: '%'
+    config_file: '~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/mysql.txt'
+    priv: '*.*:ALL,GRANT'
+    state: present
