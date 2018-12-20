@@ -17,60 +17,56 @@
         disks:
           - disk-01
           - disk-02
-          - disk-03
-          - disk-04
-          - disk-05
-          - disk-06
-          - disk-07
-          - disk-08
-          # - disk-09
-          # - disk-10
-          # - disk-11
+          # - disk-03
+          # - disk-04
+          # - disk-05
+          # - disk-06
+          # - disk-07
+          # - disk-08
         addresses:
           - addr-01
           - addr-02
-          - addr-03
-          - addr-04
-          - addr-05
-          - addr-06
-          - addr-07
-          - addr-08
-          # - addr-09
-          # - addr-10
-          # - addr-11
+          # - addr-03
+          # - addr-04
+          # - addr-05
+          # - addr-06
+          # - addr-07
+          # - addr-08
         instances:
-          - { index: 01, number: 1, tag: wslb }
-          - { index: 02, number: 2, tag: wslb }
-          - { index: 03, number: 1, tag: ws }
-          - { index: 04, number: 2, tag: ws }
-          - { index: 05, number: 1, tag: ghostlb }
-          - { index: 06, number: 2, tag: ghostlb }
-          - { index: 07, number: 1, tag: ghostcore }
-          - { index: 8,  number: 2, tag: ghostcore }
-          # - { index: 09, number: 1, tag: db }
-          # - { index: 10, number: 2, tag: db }
-          # - { index: 11, number: 3, tag: db }
+          # - { index: 1, number: 1, tag: wslb }
+          # - { index: 2, number: 1, tag: ws }
+          # - { index: 3, number: 2, tag: ws }
+          # - { index: 4, number: 1, tag: ghostlb }
+          # - { index: 5, number: 1, tag: ghostcore }
+          # - { index: 6, number: 2, tag: ghostcore }
+          - { index: 1, number: 1, tag: masterdb }
+          - { index: 2, number: 2, tag: slavedb }
           
 
-- hosts: wslb
-  become: yes
-  roles: 
-    - role: webLoadBalancers
-
-- hosts: ws
-  become: yes
-  roles:
-    - role: webServers
-
-- hosts: ghostlb
-  become: yes
-  roles:
-    - role: ghostLoadBalancers
-
-# - hosts: db
+# - hosts: wslb
+#   become: yes
+#   roles: 
+#     - role: webLoadBalancers
+# 
+# - hosts: ws
 #   become: yes
 #   roles:
-#     - role: dataBases
+#     - role: webServers
+# 
+# - hosts: ghostlb
+#   become: yes
+#   roles:
+#     - role: ghostLoadBalancers
+
+- hosts: masterdb
+  become: yes
+  roles:
+    - role: masterDB
+
+- hosts: slavedb
+  become: yes
+  roles:
+    - role: slaveDB
 
 # - hosts: ghostcore
 #   become: yes

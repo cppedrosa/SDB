@@ -4,23 +4,23 @@
   tags:
     - ws
 
-# # Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
-# - name: Copy NGINX Configuration File
-#   template:
-#     src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
-#     dest: "/etc/nginx/sites-available/default"
-#   tags:
-#     - ws
-# 
-# # Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
-# - name: Copy NGinX Configuration File
-#   template:
-#     src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
-#     dest: "/etc/nginx/sites-enabled/default"
-#   tags:
-#     - ws
-# 
-# - name: Restart nginx
-#   service:
-#     name: nginx
-#     state: restarted
+# Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
+- name: Copy NGINX Configuration File
+  template:
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
+    dest: "/etc/nginx/sites-available/default"
+  tags:
+    - ws
+
+# Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
+- name: Copy NGinX Configuration File
+  template:
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
+    dest: "/etc/nginx/sites-enabled/default"
+  tags:
+    - ws
+
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted

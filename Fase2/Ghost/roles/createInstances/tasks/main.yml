@@ -81,83 +81,41 @@
   register: instance
   loop: "{{ instances }}"
 
-# Replace 1st WebServer Internal IP in the Web HAProxy Config File
-- name: Replace Web HAProxy's 1st IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
-    regexp: 'WEBSERVER1'
-    replace: "{{ instance.results[2].networkInterfaces[0].networkIP }}"
-
-# Replace 2nd WebServer Internal IP in the Web HAProxy Config File
-- name: Replace Web HAProxy's 2nd IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
-    regexp: 'WEBSERVER2'
-    replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
-
-# Replace External IP in Web KeepAlived Config File
-- name: Replace Web KeepAlived's IP's
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webkeepalived.conf"
-    regexp: 'EXTERNALIP'
-    replace: "{{ address.results[0].address }}"
-
-# Replace Internal IP in Web KeepAlived Config File
-- name: Replace Web KeepAlived's IP's
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webkeepalived.conf"
-    regexp: 'INTERNALIP'
-    replace: "{{ network.gatewayIPv4 }}"
-
-# Replace WEBSERVER1 Internal IP in Web KeepAlived Config File
-- name: Replace Web KeepAlived's IP's
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webkeepalived.conf"
-    regexp: 'WEBSERVER1'
-    replace: "{{ instance.results[2].networkInterfaces[0].networkIP }}"
-
-# Replace WEBSERVER2 Internal IP in Web KeepAlived Config File
-- name: Replace Web KeepAlived's IP's
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webkeepalived.conf"
-    regexp: 'WEBSERVER2'
-    replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
-
-# Replace INTERNALIP Internal IP in NGINX Config File
-- name: Replace NGINX Config File
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
-    regexp: 'INTERNALIP'
-    replace: "10.240.0.128"
-
-# Replace 1st GhostCore Internal IP in the Ghost HAProxy Config File
-- name: Replace Ghost HAProxy's 1st IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
-    regexp: 'GHOSTCORE1'
-    replace: "{{ instance.results[6].networkInterfaces[0].networkIP }}"
-
-# Replace 2nd GhostCore Internal IP in the Web HAProxy Config File
-- name: Replace Ghost HAProxy's 2nd IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
-    regexp: 'GHOSTCORE2'
-    replace: "{{ instance.results[7].networkInterfaces[0].networkIP }}"
-
-# Replace GHOSTCORE1 Internal IP in Ghost KeepAlived Config File
-- name: Replace Ghost KeepAlived's IP's
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghostkeepalived.conf"
-    regexp: 'GHOSTCORE1'
-    replace: "{{ instance.results[6].networkInterfaces[0].networkIP }}"
-
-# Replace WEBSERVER2 Internal IP in Web KeepAlived Config File
-- name: Replace Ghost KeepAlived's IP's
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghostkeepalived.conf"
-    regexp: 'GHOSTCORE2'
-    replace: "{{ instance.results[7].networkInterfaces[0].networkIP }}"
-
+# # Replace 1st WebServer Internal IP in the Web HAProxy Config File
+# - name: Replace Web HAProxy's 1st IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
+#     regexp: 'WEBSERVER1'
+#     replace: "{{ instance.results[1].networkInterfaces[0].networkIP }}"
+# 
+# # Replace 2nd WebServer Internal IP in the Web HAProxy Config File
+# - name: Replace Web HAProxy's 2nd IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
+#     regexp: 'WEBSERVER2'
+#     replace: "{{ instance.results[2].networkInterfaces[0].networkIP }}"
+# 
+# # Replace INTERNALIP Internal IP in NGINX Config File
+# - name: Replace NGINX Config File
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
+#     regexp: 'INTERNALIP'
+#     replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
+# 
+# # Replace 1st GhostCore Internal IP in the Ghost HAProxy Config File
+# - name: Replace Ghost HAProxy's 1st IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
+#     regexp: 'GHOSTCORE1'
+#     replace: "{{ instance.results[4].networkInterfaces[0].networkIP }}"
+# 
+# # Replace 2nd GhostCore Internal IP in the Web HAProxy Config File
+# - name: Replace Ghost HAProxy's 2nd IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
+#     regexp: 'GHOSTCORE2'
+#     replace: "{{ instance.results[5].networkInterfaces[0].networkIP }}"
+# 
 - name: Add hosts to in memory inventory
   add_host:
     name: "{{ item.networkInterfaces[0].accessConfigs[0].natIP }}"

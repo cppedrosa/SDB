@@ -5,7 +5,7 @@
   # Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
 - name: Copy MySQL Conf File
   template:
-    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/mysqld.cnf"
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/mysqldS.cnf"
     dest: "/etc/mysql/mysql.conf.d/mysqld.cnf"
   tags:
     - wslb
@@ -15,11 +15,11 @@
     name: mysql
     state: restarted
 
-- name: Change Root Password
-  mysql_user:
-    name: root
-    password: 2130
-    state: present
+# - name: Change Root Password
+#   mysql_user:
+#     name: root
+#     password: 2130
+#     state: present
 
 - name: Create User For Ghost
   mysql_user:
@@ -28,6 +28,14 @@
     name: ghost_user
     password: 'ghost'
     host: '%'
-    config_file: '~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/mysql.txt'
     priv: '*.*:ALL,GRANT'
     state: present
+
+- name: Configure replication on the slave.
+  mysql_replication:
+    mode: changemaster
+    login_user: root
+    login_password: 2130
+    master_host: "10.240.0.3"
+    master_user: "replication_user"
+    master_password: "user_replication"

@@ -1,9 +1,3 @@
-- name: Install Keepalived
-  apt:
-    name: keepalived
-  tags:
-    - wslb
-
 - name: Install HAProxy
   apt:
     name: haproxy
@@ -18,19 +12,7 @@
   tags:
     - wslb
 
-- name: Copy KeepAlived Configuration File
-  template:
-    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webkeepalived.conf"
-    dest: "/etc/keepalived/keepalived.conf"
-  tags:
-    - wslb
- 
 - name: restart haproxy
   service:
     name: haproxy
-    state: restarted
-
-- name: restart keepalived
-  service:
-    name: keepalived
     state: restarted
