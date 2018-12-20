@@ -13,14 +13,14 @@
 # Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
 - name: Copy HAProxy Configuration File
   template:
-    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/haproxy.cfg"
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
     dest: "/etc/haproxy/haproxy.cfg"
   tags:
     - wslb
 
 - name: Copy KeepAlived Configuration File
   template:
-    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/keepalived.conf"
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webkeepalived.conf"
     dest: "/etc/keepalived/keepalived.conf"
   tags:
     - wslb

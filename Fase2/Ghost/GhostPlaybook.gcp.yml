@@ -16,47 +16,61 @@
         disk_size: 10
         disks:
           - disk-01
-          # - disk-02
-          # - disk-03
-          # - disk-04
+          - disk-02
+          - disk-03
+          - disk-04
+          - disk-05
+          - disk-06
+          - disk-07
+          - disk-08
+          # - disk-09
+          # - disk-10
+          # - disk-11
         addresses:
           - addr-01
-          # - addr-02
-          # - addr-03
-          # - addr-04
+          - addr-02
+          - addr-03
+          - addr-04
+          - addr-05
+          - addr-06
+          - addr-07
+          - addr-08
+          # - addr-09
+          # - addr-10
+          # - addr-11
         instances:
-          # - { index: 1, tag: wslb }
-          # - { index: 2, tag: wslb }
-          # - { index: 3, tag: ws }
-          # - { index: 4, tag: ws }
-          # - { index: 1, tag: ghostlb }
-          # - { index: 2, tag: ghostlb }
-          # - { index: 1, tag: ghostcore }
-          # - { index: 2, tag: ghostcore }
-           - { index: 1, tag: db }
-          # - { index: 2, tag: db }
-          # - { index: 3, tag: db }
+          - { index: 01, number: 1, tag: wslb }
+          - { index: 02, number: 2, tag: wslb }
+          - { index: 03, number: 1, tag: ws }
+          - { index: 04, number: 2, tag: ws }
+          - { index: 05, number: 1, tag: ghostlb }
+          - { index: 06, number: 2, tag: ghostlb }
+          - { index: 07, number: 1, tag: ghostcore }
+          - { index: 8,  number: 2, tag: ghostcore }
+          # - { index: 09, number: 1, tag: db }
+          # - { index: 10, number: 2, tag: db }
+          # - { index: 11, number: 3, tag: db }
           
 
-# - hosts: wslb
-#   become: yes
-#   roles: 
-#     - role: webLoadBalancers
+- hosts: wslb
+  become: yes
+  roles: 
+    - role: webLoadBalancers
 
-# - hosts: ws
-#   become: yes
-#   roles:
-#     - role: webServers
-
-# - hosts: ghostlb
-#   become: yes
-#   roles:
-#     - role: ghostLoadBalancers
-
-- hosts: db
+- hosts: ws
   become: yes
   roles:
-    - role: dataBases
+    - role: webServers
+
+- hosts: ghostlb
+  become: yes
+  roles:
+    - role: ghostLoadBalancers
+
+# - hosts: db
+#   become: yes
+#   roles:
+#     - role: dataBases
 
 # - hosts: ghostcore
 #   become: yes
