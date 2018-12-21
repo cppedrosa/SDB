@@ -15,11 +15,11 @@
     name: mysql
     state: restarted
 
-# - name: Change Root Password
-#   mysql_user:
-#     name: root
-#     password: 2130
-#     state: present
+- name: Change Root Password
+  mysql_user:
+    name: root
+    password: 2130
+    state: present
 
 - name: Create User For Ghost
   mysql_user:

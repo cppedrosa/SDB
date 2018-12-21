@@ -15,20 +15,10 @@
     name: mysql
     state: restarted
 
-# - name: Change Root Password
-#   mysql_user:
-#     name: root
-#     password: 2130
-#     state: present
-
-- name: Create User For Ghost
+- name: Change Root Password
   mysql_user:
-    login_user: root
-    login_password: 2130
-    name: ghost_user
-    password: 'ghost'
-    host: '%'
-    priv: '*.*:ALL,GRANT'
+    name: root
+    password: 2130
     state: present
 
 - name: Configure replication on the slave.
@@ -36,6 +26,13 @@
     mode: changemaster
     login_user: root
     login_password: 2130
-    master_host: "10.240.0.3"
+    master_host: "10.240.0.2"
     master_user: "replication_user"
     master_password: "user_replication"
+    master_log_file: "/var/log/mysql/mysql-bin.log"
+
+- name: Start replication.
+  mysql_replication: 
+    mode: startslave
+    login_user: root
+    login_password: 2130
