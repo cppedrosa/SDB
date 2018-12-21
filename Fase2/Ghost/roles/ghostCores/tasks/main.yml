@@ -1,0 +1,50 @@
+- name: Add Nodejs 8 Repository
+  shell: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+  become: yes
+
+- name: Install Nodejs 8
+  command: apt-get install -y nodejs warn=False
+  become: yes
+  
+
+- name: Install Ghost-CLI
+  command: npm install ghost-cli@latest -g
+  become: yes
+
+# Create Ghost Installation Directory if t Doesn't Exist
+- name: Create Ghost Installation Directory
+  file:
+    path: ~/gh/
+    state: directory
+  become: no
+
+- name: Install Ghost Inside ~/gh/
+  command: ghost install local
+  args:
+    chdir: ~/gh/
+  become: no
+
+- name: Stop Local Ghost Installation
+  command: ghost stop
+  args:
+    chdir: ~/gh/
+  become: no
+
+- name: Remove Ghost Configuration File
+  command: rm config.development.json
+  args:
+    chdir: ~/gh/
+  become: no
+
+# Copiar o Ficheiro De Configuração Para a Respectiva Diretoria
+- name: Copy Ghost Configuration File
+  template:
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/config.production.json"
+    dest: "~/gh/config.production.json"
+  become: no
+
+- name: Start Ghost With New Config File
+  command: ghost start
+  args:
+    chdir: ~/gh/
+  become: no

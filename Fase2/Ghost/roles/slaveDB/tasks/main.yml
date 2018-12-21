@@ -7,8 +7,6 @@
   template:
     src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/mysqldS.cnf"
     dest: "/etc/mysql/mysql.conf.d/mysqld.cnf"
-  tags:
-    - wslb
 
 - name: Restart MySQL Server
   service:

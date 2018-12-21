@@ -1,0 +1,25 @@
+{
+  "url": "http://localhost",
+  "server": {
+    "port": 2368,
+    "host": "0.0.0.0"
+  },
+  "database": {
+    "client": "mysql",
+    "connection": {
+      "host": "MySQLINTERNALIP",
+      "user": "ghost_user",
+      "password": "ghost",
+      "database": "ghost_prod"
+    }
+  },
+  "mail": {
+    "transport": "Direct"
+  },
+  "logging": {
+    "transports": [
+      "file",
+      "stdout"
+    ]
+  }
+}
