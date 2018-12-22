@@ -10,7 +10,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $http_host;
-        proxy_pass http://INTERNALIP:80;
+        proxy_pass http://10.240.0.5:80;
     }
 
     location ~ /.well-known {

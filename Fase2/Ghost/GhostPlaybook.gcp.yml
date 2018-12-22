@@ -37,10 +37,10 @@
           - { index: 2, number: 1, tag: ws }
           - { index: 3, number: 2, tag: ws }
           - { index: 4, number: 1, tag: ghostlb }
-          - { index: 5, number: 1, tag: ghostcore }
-          - { index: 6, number: 2, tag: ghostcore }
+          - { index: 5, number: 1, tag: ghostcore1 }
+          - { index: 6, number: 2, tag: ghostcore2 }
           - { index: 7, number: 1, tag: masterdb }
-          # - { index: 2, number: 2, tag: slavedb }
+          # - { index: 8, number: 2, tag: slavedb }
           
 
 - hosts: wslb
@@ -68,7 +68,12 @@
 #   roles:
 #     - role: slaveDB
 
-- hosts: ghostcore
+- hosts: ghostcore1
+  become: yes
+  roles:
+    - role: ghostCores
+
+- hosts: ghostcore2
   become: yes
   roles:
     - role: ghostCores

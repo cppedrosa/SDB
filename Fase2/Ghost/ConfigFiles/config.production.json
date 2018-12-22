@@ -7,7 +7,7 @@
   "database": {
     "client": "mysql",
     "connection": {
-      "host": "MySQLINTERNALIP",
+      "host": "10.240.0.8",
       "user": "ghost_user",
       "password": "ghost",
       "database": "ghost_prod"
