@@ -81,55 +81,55 @@
   register: instance
   loop: "{{ instances }}"
 
-# Replace 1st WebServer Internal IP in the Web HAProxy Config File
-- name: Replace Web HAProxy's 1st IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
-    regexp: 'WEBSERVER1'
-    replace: "{{ instance.results[1].networkInterfaces[0].networkIP }}"
-
-# Replace 2nd WebServer Internal IP in the Web HAProxy Config File
-- name: Replace Web HAProxy's 2nd IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
-    regexp: 'WEBSERVER2'
-    replace: "{{ instance.results[2].networkInterfaces[0].networkIP }}"
-
-# Replace INTERNALIP Internal IP in NGINX Config File
-- name: Replace NGINX Config File
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
-    regexp: 'INTERNALIP'
-    replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
-
-# Replace 1st GhostCore Internal IP in the Ghost HAProxy Config File
-- name: Replace Ghost HAProxy's 1st IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
-    regexp: 'GHOSTCORE1'
-    replace: "{{ instance.results[4].networkInterfaces[0].networkIP }}"
-
-# Replace 2nd GhostCore Internal IP in the Web HAProxy Config File
-- name: Replace Ghost HAProxy's 2nd IP
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
-    regexp: 'GHOSTCORE2'
-    replace: "{{ instance.results[5].networkInterfaces[0].networkIP }}"
-
-# # Replace URL In Ghost Config File
-# - name: Replace Ghost URL In Ghost Config File
+# # Replace 1st WebServer Internal IP in the Web HAProxy Config File
+# - name: Replace Web HAProxy's 1st IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
+#     regexp: 'WEBSERVER1'
+#     replace: "{{ instance.results[1].networkInterfaces[0].networkIP }}"
+# 
+# # Replace 2nd WebServer Internal IP in the Web HAProxy Config File
+# - name: Replace Web HAProxy's 2nd IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/webhaproxy.cfg"
+#     regexp: 'WEBSERVER2'
+#     replace: "{{ instance.results[2].networkInterfaces[0].networkIP }}"
+# 
+# # Replace INTERNALIP Internal IP in NGINX Config File
+# - name: Replace NGINX Config File
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/default"
+#     regexp: 'INTERNALIP'
+#     replace: "{{ instance.results[3].networkInterfaces[0].networkIP }}"
+# 
+# # Replace 1st GhostCore Internal IP in the Ghost HAProxy Config File
+# - name: Replace Ghost HAProxy's 1st IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
+#     regexp: 'GHOSTCORE1'
+#     replace: "{{ instance.results[4].networkInterfaces[0].networkIP }}"
+# 
+# # Replace 2nd GhostCore Internal IP in the Web HAProxy Config File
+# - name: Replace Ghost HAProxy's 2nd IP
+#   replace:
+#     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/ghosthaproxy.cfg"
+#     regexp: 'GHOSTCORE2'
+#     replace: "{{ instance.results[5].networkInterfaces[0].networkIP }}"
+# 
+# # # Replace URL In Ghost Config File
+# # - name: Replace Ghost URL In Ghost Config File
+# #   replace:
+# #     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/config.production.json"
+# #     regexp: 'EXTERNALURL'
+# #     replace: "{{ instance.results[5].networkInterfaces[0].networkIP }}"
+# 
+# # Replace MySQL IP In Ghost Config File
+# - name: Replace MySQL Internal IP In Ghost Config File
 #   replace:
 #     path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/config.production.json"
-#     regexp: 'EXTERNALURL'
-#     replace: "{{ instance.results[5].networkInterfaces[0].networkIP }}"
-
-# Replace MySQL IP In Ghost Config File
-- name: Replace MySQL Internal IP In Ghost Config File
-  replace:
-    path: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/config.production.json"
-    regexp: 'MySQLINTERNALIP'
-    replace: "{{ instance.results[6].networkInterfaces[0].networkIP }}"
-
+#     regexp: 'MySQLINTERNALIP'
+#     replace: "{{ instance.results[6].networkInterfaces[0].networkIP }}"
+# 
 - name: Add hosts to in memory inventory
   add_host:
     name: "{{ item.networkInterfaces[0].accessConfigs[0].natIP }}"

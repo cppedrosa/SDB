@@ -12,7 +12,7 @@
   service:
     name: mysql
     state: restarted
-
+    
 - name: Change Root Password
   mysql_user:
     name: root
@@ -35,6 +35,6 @@
     login_password: 2130
     name: replication_user
     password: 'user_replication'
-    priv: '*.*:REPLICATION SLAVE,REPLICATION CLIENT'
+    priv: '*.*:REPLICATION SLAVE'
     host: '%'
     state: present

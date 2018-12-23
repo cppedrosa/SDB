@@ -17,63 +17,71 @@
         disks:
           - disk-01
           - disk-02
-          - disk-03
-          - disk-04
-          - disk-05
-          - disk-06
-          - disk-07
+          # - disk-03
+          # - disk-04
+          # - disk-05
+          # - disk-06
+          # - disk-07
           # - disk-08
+          # - disk-09
         addresses:
           - addr-01
           - addr-02
-          - addr-03
-          - addr-04
-          - addr-05
-          - addr-06
-          - addr-07
+          # - addr-03
+          # - addr-04
+          # - addr-05
+          # - addr-06
+          # - addr-07
           # - addr-08
+          # - addr-09
         instances:
-          - { index: 1, number: 1, tag: wslb }
-          - { index: 2, number: 1, tag: ws }
-          - { index: 3, number: 2, tag: ws }
-          - { index: 4, number: 1, tag: ghostlb }
-          - { index: 5, number: 1, tag: ghostcore1 }
-          - { index: 6, number: 2, tag: ghostcore2 }
-          - { index: 7, number: 1, tag: masterdb }
-          # - { index: 8, number: 2, tag: slavedb }
-          
+          # - { index: 1, number: 1, tag: monitor }
+          # - { index: 2, number: 1, tag: wslb }
+          # - { index: 3, number: 1, tag: ws }
+          # - { index: 4, number: 2, tag: ws }
+          # - { index: 5, number: 1, tag: ghostlb }
+          # - { index: 6, number: 1, tag: ghostcore1 }
+          # - { index: 7, number: 2, tag: ghostcore2 }
+          - { index: 1, number: 1, tag: masterdb }
+          - { index: 2, number: 2, tag: slavedb }
 
-- hosts: wslb
-  become: yes
-  roles: 
-    - role: webLoadBalancers
-
-- hosts: ws
-  become: yes
-  roles:
-    - role: webServers
-
-- hosts: ghostlb
-  become: yes
-  roles:
-    - role: ghostLoadBalancers
+# - hosts: monitor
+#   become: yes
+#   roles: 
+#     - role: webLoadBalancers  
+# 
+# - hosts: wslb
+#   become: yes
+#   roles: 
+#     - role: webLoadBalancers
+# 
+# - hosts: ws
+#   become: yes
+#   roles:
+#     - role: webServers
+# 
+# - hosts: ghostlb
+#   become: yes
+#   roles:
+#     - role: ghostLoadBalancers
 
 - hosts: masterdb
   become: yes
   roles:
     - role: masterDB
 
-# - hosts: slavedb
+- hosts: slavedb
+  become: yes
+  roles:
+    - role: slaveDB
+
+# # Concurrency Issues Forced This Solution
+# - hosts: ghostcore1
 #   become: yes
 #   roles:
-#     - role: slaveDB
-
-- hosts: ghostcore1
-  become: yes
-  roles:
-    - role: ghostCores
-
-- hosts: ghostcore2
-  become: yes
-  roles:
-    - role: ghostCores
+#     - role: ghostCores
+# 
+# - hosts: ghostcore2
+#   become: yes
+#   roles:
+#     - role: ghostCores

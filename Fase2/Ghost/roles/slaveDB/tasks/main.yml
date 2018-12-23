@@ -27,7 +27,8 @@
     master_host: "10.240.0.2"
     master_user: "replication_user"
     master_password: "user_replication"
-    master_log_file: "/var/log/mysql/mysql-bin.log"
+    master_log_file: "/var/log/mysql/mysql-bin.000001"
+    master_log_pos: "1306"
 
 - name: Start replication.
   mysql_replication: 
