@@ -1,0 +1,25 @@
+- name: Download ElasticSearch From GCP Bucket
+  command: gsutil cp gs://sdbghost/elasticsearch.tar .
+
+- name: Download Kibana From GCP Bucket
+  command: gsutil cp gs://sdbghost/kibana.tar .
+
+- name: Extract ElasticSearch
+  command: tar -xvzf elasticsearch.tar
+
+- name: Extract Kibana
+  command: tar -xvzf kibana.tar
+
+- name: Set VM.MAX_MAP_COUNT
+  command: sysctl -w vm.max_map_count=262144
+  become: yes
+
+- name: Start ElasticSearch
+  command: ./elasticsearch &
+  args:
+    chdir: ~/elasticsearch/
+
+- name: Start Kibana
+  command: ./kibana &
+  args:
+    chdir: ~/kibana/

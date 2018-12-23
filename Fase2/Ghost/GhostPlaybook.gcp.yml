@@ -16,7 +16,7 @@
         disk_size: 10
         disks:
           - disk-01
-          - disk-02
+          # - disk-02
           # - disk-03
           # - disk-04
           # - disk-05
@@ -26,7 +26,7 @@
           # - disk-09
         addresses:
           - addr-01
-          - addr-02
+          # - addr-02
           # - addr-03
           # - addr-04
           # - addr-05
@@ -35,20 +35,20 @@
           # - addr-08
           # - addr-09
         instances:
-          # - { index: 1, number: 1, tag: monitor }
+          - { index: 1, number: 1, tag: monitor }
           # - { index: 2, number: 1, tag: wslb }
           # - { index: 3, number: 1, tag: ws }
           # - { index: 4, number: 2, tag: ws }
           # - { index: 5, number: 1, tag: ghostlb }
           # - { index: 6, number: 1, tag: ghostcore1 }
           # - { index: 7, number: 2, tag: ghostcore2 }
-          - { index: 1, number: 1, tag: masterdb }
-          - { index: 2, number: 2, tag: slavedb }
+          # - { index: 1, number: 1, tag: masterdb }
+          # - { index: 2, number: 2, tag: slavedb }
 
-# - hosts: monitor
-#   become: yes
-#   roles: 
-#     - role: webLoadBalancers  
+- hosts: monitor
+  become: no
+  roles: 
+    - role: monitorTools 
 # 
 # - hosts: wslb
 #   become: yes
@@ -64,24 +64,24 @@
 #   become: yes
 #   roles:
 #     - role: ghostLoadBalancers
-
-- hosts: masterdb
-  become: yes
-  roles:
-    - role: masterDB
-
-- hosts: slavedb
-  become: yes
-  roles:
-    - role: slaveDB
-
+# 
+# - hosts: masterdb
+#   become: yes
+#   roles:
+#     - role: masterDB
+# 
+# - hosts: slavedb
+#   become: yes
+#   roles:
+#     - role: slaveDB
+# 
 # # Concurrency Issues Forced This Solution
 # - hosts: ghostcore1
-#   become: yes
+#   become: no
 #   roles:
 #     - role: ghostCores
 # 
 # - hosts: ghostcore2
-#   become: yes
+#   become: no
 #   roles:
 #     - role: ghostCores
