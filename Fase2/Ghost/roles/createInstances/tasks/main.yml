@@ -41,11 +41,14 @@
     allowed:
       - ip_protocol: tcp
         ports:
-          - 22
-          - 80
-          - 443
-          - 2368
-          - 3306
+          - 22    # ssh
+          - 80    # http
+          - 443   # https
+          - 2368  # Ghost Core
+          - 3306  # MySQL 
+          - 5601  # Kibana
+          - 9200  # ElasticSearch
+          - 9300  # ElasticSearch
       - ip_protocol: icmp
     network: "global/networks/{{ network.name }}"
     project: "{{ gcp_project }}"

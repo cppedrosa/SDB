@@ -11,7 +11,7 @@
         gcp_project: sdb-aula-pratica
         gcp_cred_kind: serviceaccount
         gcp_cred_file: ~/Desktop/UMinho/credentials.json
-        gcp_machine_type: f1-micro
+        gcp_machine_type: n1-standard-1
         source_image: projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts
         disk_size: 10
         disks:
@@ -46,7 +46,7 @@
           # - { index: 2, number: 2, tag: slavedb }
 
 - hosts: monitor
-  become: no
+  become: yes
   roles: 
     - role: monitorTools 
 # 
