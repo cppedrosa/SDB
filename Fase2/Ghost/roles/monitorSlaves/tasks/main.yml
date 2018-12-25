@@ -1,0 +1,38 @@
+- name: Update apt packages
+  apt:
+    update_cache: yes
+  become: yes
+
+
+- name: Download MetricBeat
+  get_url:
+    url: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-6.5.4-linux-x86_64.tar.gz
+    dest: ~/metricbeat.tar.gz
+
+- name: Extract MetricBeat
+  unarchive:
+    src: ~/metricbeat.tar.gz
+    dest: ~/
+    remote_src: yes
+
+- name: Rename MetricBeat Directory
+  shell: mv ~/metricbeat-6.5.4-linux-x86_64/ ~/metricbeat
+
+# Copiar os Ficheiros De Configuração Para as Respectivas Diretorias
+- name: Copy MetricBeat Config File To Directory
+  template:
+    src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/metricbeat.yml"
+    dest: "~/metricbeat/metricbeat.yml"
+
+- name: MetricBeat Initial Setup
+  shell: ./metricbeat setup
+  args:
+    chdir: ~/metricbeat/
+
+- name: Run MetricBeat
+  shell: nohup ./metricbeat > /dev/null &
+  args:
+    chdir: ~/metricbeat/
+    executable: /bin/bash
+
+
