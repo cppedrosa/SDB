@@ -6,12 +6,12 @@
   roles:
     - role: createInstances
       vars:
-        gcp_zone: us-west1-b
-        gcp_region: us-west1
+        gcp_zone: europe-west4-b
+        gcp_region: europe-west4
         gcp_project: sdb-aula-pratica
         gcp_cred_kind: serviceaccount
         gcp_cred_file: ~/Desktop/UMinho/credentials.json
-        gcp_machine_type: n1-standard-1
+        gcp_machine_type: n1-standard-2
         source_image: projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts
         disk_size: 10
         disks:
@@ -23,7 +23,7 @@
           - disk-06
           - disk-07
           - disk-08
-          - disk-09
+          # - disk-09
         addresses:
           - addr-01
           - addr-02
@@ -33,7 +33,7 @@
           - addr-06
           - addr-07
           - addr-08
-          - addr-09
+          # - addr-09
         instances:
           - { index: 1, number: 1, tag: monitor }
           - { index: 2, number: 1, tag: wslb }
@@ -43,7 +43,7 @@
           - { index: 6, number: 1, tag: ghostcore1 }
           - { index: 7, number: 2, tag: ghostcore2 }
           - { index: 8, number: 1, tag: masterdb }
-          - { index: 9, number: 2, tag: slavedb }
+          # - { index: 9, number: 2, tag: slavedb }
 
 - hosts: monitor
   become: yes

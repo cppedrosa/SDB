@@ -24,6 +24,8 @@
     src: "~/Desktop/UMinho/4º\ Ano/Comp\ SD\ -\ System\ Deployment\ and\ Benchmarking/SDB2018-TP/Fase2/Ghost/ConfigFiles/metricbeat.yml"
     dest: "~/metricbeat/metricbeat.yml"
 
+############# DEVELOPMENT ENVIRONMENT #############
+
 - name: MetricBeat Initial Setup
   shell: ./metricbeat setup
   args:
@@ -34,5 +36,3 @@
   args:
     chdir: ~/metricbeat/
     executable: /bin/bash
-
-

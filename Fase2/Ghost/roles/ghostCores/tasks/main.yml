@@ -28,10 +28,10 @@
     chdir: ~/gh/
 
 - name: Remove Ghost Configuration File
-  command: rm config.development.json
-  args:
-    chdir: ~/gh/
-
+  file:
+    path: ~/gh/config.development.json
+    state: absent
+    
 # Copiar o Ficheiro De Configuração Para a Respectiva Diretoria
 - name: Copy Ghost Configuration File
   template:
@@ -42,3 +42,24 @@
   command: ghost start
   args:
     chdir: ~/gh/
+
+############# PRODUCTION ENVIRONMENT  #############
+
+# - name: Enable Metrics For MetricBeat Production
+#   shell: ./metricbeat modules enable system
+#   args:
+#     chdir: ~/metricbeat/
+#   become: no
+# 
+# - name: MetricBeat Initial Setup
+#   shell: ./metricbeat setup
+#   args:
+#     chdir: ~/metricbeat/
+#   become: no
+# 
+# - name: Run MetricBeat
+#   shell: nohup ./metricbeat > /dev/null &
+#   args:
+#     chdir: ~/metricbeat/
+#     executable: /bin/bash
+#   become: no

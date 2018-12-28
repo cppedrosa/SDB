@@ -24,3 +24,24 @@
   service:
     name: nginx
     state: restarted
+
+############# PRODUCTION ENVIRONMENT  #############
+
+# - name: Enable Metrics For MetricBeat Production
+#   shell: ./metricbeat modules enable system nginx
+#   args:
+#     chdir: ~/metricbeat/
+#   become: no
+# 
+# - name: MetricBeat Initial Setup
+#   shell: ./metricbeat setup
+#   args:
+#     chdir: ~/metricbeat/
+#   become: no
+# 
+# - name: Run MetricBeat
+#   shell: nohup ./metricbeat > /dev/null &
+#   args:
+#     chdir: ~/metricbeat/
+#     executable: /bin/bash
+#   become: no
