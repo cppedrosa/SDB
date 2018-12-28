@@ -75,10 +75,10 @@
   roles:
     - role: masterDB
 
-- hosts: slavedb
-  become: yes
-  roles:
-    - role: slaveDB
+# - hosts: slavedb
+#   become: yes
+#   roles:
+#     - role: slaveDB
 
 # Concurrency Issues Forced This Solution
 - hosts: ghostcore1

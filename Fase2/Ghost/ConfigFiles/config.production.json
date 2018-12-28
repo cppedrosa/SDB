@@ -1,5 +1,5 @@
 {
-  "url": "http://35.247.123.223",
+  "url": "http://EXTERNALURL",
   "server": {
     "port": 2368,
     "host": "0.0.0.0"
@@ -7,7 +7,7 @@
   "database": {
     "client": "mysql",
     "connection": {
-      "host": "10.240.0.9",
+      "host": "MySQLINTERNALIP",
       "user": "ghost_user",
       "password": "ghost",
       "database": "ghost_prod"
