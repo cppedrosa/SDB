@@ -1,4 +1,4 @@
-# SDB2018-TP
+# 18/19 SDB - TP
 System Deployment and Benchmarking - Trabalho Prático
 
 </br>
